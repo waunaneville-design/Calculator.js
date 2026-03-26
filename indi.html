@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Simple Calculator</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="calculator">
+    <h2>Calculator</h2>
+    <input type="number" id="num1" placeholder="Enter first number">
+    <input type="number" id="num2" placeholder="Enter second number">
+
+    <div class="buttons">
+      <button onclick="calculate('add')">+</button>
+      <button onclick="calculate('subtract')">-</button>
+      <button onclick="calculate('multiply')">*</button>
+      <button onclick="calculate('divide')">/</button>
+    </div>
+
+    <p id="result">Result: </p>
+
+    <h3>History</h3>
+    <ul id="historyList"></ul>
+  </div>
+
+  <script src="calc.js"></script>
+  <script>
+    function calculate(operation) {
+      const a = parseFloat(document.getElementById('num1').value);
+      const b = parseFloat(document.getElementById('num2').value);
+      let result;
+
+      switch(operation) {
+        case 'add': result = add(a, b); break;
+        case 'subtract': result = subtract(a, b); break;
+        case 'multiply': result = multiply(a, b); break;
+        case 'divide': result = divide(a, b); break;
+      }
+
+      document.getElementById('result').textContent = "Result: " + result;
+      updateHistory();
+    }
+
+    function updateHistory() {
+      const historyList = document.getElementById('historyList');
+      historyList.innerHTML = "";
+      history.forEach(entry => {
+        const li = document.createElement('li');
+        li.textContent = entry;
+        historyList.appendChild(li);
+      });
+    }
+  </script>
+</body>
+</html>
